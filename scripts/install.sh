@@ -71,6 +71,8 @@ if [ "$os" = "windows" ]; then
 fi
 
 INSTALL_DIR=$HOME/.strix/bin
+CONFIG_DIR=$HOME/.strix
+CONFIG_FILE=$CONFIG_DIR/config.json
 mkdir -p "$INSTALL_DIR"
 
 if [ -z "$requested_version" ]; then
@@ -335,9 +337,16 @@ echo -e "${MUTED}  AI Penetration Testing Agent${NC}"
 echo ""
 echo -e "${MUTED}To get started:${NC}"
 echo ""
-echo -e "  ${CYAN}1.${NC} Set your environment:"
-echo -e "     ${MUTED}export LLM_API_KEY='your-api-key'${NC}"
-echo -e "     ${MUTED}export STRIX_LLM='openai/gpt-5.4'${NC}"
+echo -e "  ${CYAN}1.${NC} Create your config file:"
+echo -e "     ${MUTED}mkdir -p $CONFIG_DIR${NC}"
+echo -e "     ${MUTED}cat > $CONFIG_FILE <<'JSON'${NC}"
+echo -e "     ${MUTED}{${NC}"
+echo -e "     ${MUTED}  \"llm\": {${NC}"
+echo -e "     ${MUTED}    \"model\": \"openai/gpt-5.4\",${NC}"
+echo -e "     ${MUTED}    \"api_key\": \"your-api-key\"${NC}"
+echo -e "     ${MUTED}  }${NC}"
+echo -e "     ${MUTED}}${NC}"
+echo -e "     ${MUTED}JSON${NC}"
 echo ""
 echo -e "  ${CYAN}2.${NC} Run a penetration test:"
 echo -e "     ${MUTED}strix --target https://example.com${NC}"
